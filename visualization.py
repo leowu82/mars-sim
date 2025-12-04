@@ -63,22 +63,59 @@ def plot_failure_analysis(df_results):
     print("Saved: plot_failure_modes.png")
 
 
+def plot_redundancy_validation(control_traces, redundancy_traces):
+    """
+    Oxygen Stability Trace.
+    Overlays 15 random runs of Control vs Redundancy.
+    Visualizes how redundancy smooths out oxygen dips.
+    """
+    plt.figure(figsize=(12, 6))
+    
+    # Plot 15 random traces from Control (Red)
+    # These will look like "Cliffs" - steady, then plummeting to death.
+    for i in range(min(15, len(control_traces))):
+        # Only plot if they actually died of suffocation or survived to show the contrast
+        plt.plot(control_traces[i]['o2'], color='red', alpha=0.15, linewidth=1.5)
+
+    # Plot 15 random traces from Redundancy (Green)
+    # These will look like "Dips" - dropping slightly when 1 machine breaks, then recovering.
+    for i in range(min(15, len(redundancy_traces))):
+        plt.plot(redundancy_traces[i]['o2'], color='green', alpha=0.15, linewidth=1.5)
+
+    # Threshold Line
+    plt.axhline(y=0, color='black', linestyle='--', linewidth=1, label='Death Threshold')
+
+    # Legend & Labels
+    plt.plot([], [], color='red', label='Control (1 Big Machine)')
+    plt.plot([], [], color='green', label='Redundancy (3 Small Machines)')
+    
+    plt.title("Hypothesis 1 Proof: Oxygen Buffer Stability", fontsize=14)
+    plt.xlabel("Mission Day")
+    plt.ylabel("Oxygen Reserves (kg)")
+    plt.legend(loc='upper right')
+    plt.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.savefig("plot_o2_redundancy.png")
+    print("Saved: plot_o2_redundancy.png")
+
+
 def plot_battery_stability(control_traces, battery_traces):
     """
-    Resource Trace (The 'Spaghetti' Plot)
-    Overlays 10 random runs of Control vs Battery Test.
+    Resource Trace.
+    Overlays 15 random runs of Control vs Battery Test.
     Visualizes how the 'Buffer' strategy smooths out the storms.
     """
     plt.figure(figsize=(12, 6))
     
-    # Plot 10 random traces from Control (Red)
+    # Plot 15 random traces from Control (Red)
     # This shows the volatility of the small battery
-    for i in range(min(10, len(control_traces))):
+    for i in range(min(15, len(control_traces))):
         plt.plot(control_traces[i]['battery'], color='red', alpha=0.15)
         
-    # Plot 10 random traces from Battery Test (Blue)
+    # Plot 15 random traces from Battery Test (Blue)
     # This shows the stability of the large battery
-    for i in range(min(10, len(battery_traces))):
+    for i in range(min(15, len(battery_traces))):
         plt.plot(battery_traces[i]['battery'], color='blue', alpha=0.15)
         
     # Dummy lines for legend
