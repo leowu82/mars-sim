@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import textwrap
 
 def plot_survival_curves(df_results):
     """
@@ -52,7 +53,12 @@ def plot_failure_analysis(df_results):
     breakdown_pct = breakdown.div(breakdown.sum(axis=1), axis=0) * 100
     
     # Plot
-    breakdown_pct.plot(kind='bar', stacked=True, figsize=(10, 6), colormap='viridis')
+    ax = breakdown_pct.plot(kind='bar', stacked=True, figsize=(10, 6), colormap='viridis')
+
+    # Wrap x-axis labels
+    max_width = 15
+    new_labels = [textwrap.fill(label.get_text(), max_width) for label in ax.get_xticklabels()]
+    ax.set_xticklabels(new_labels, rotation=0)
     
     plt.title("Failure Mode Analysis (Cause of Death)", fontsize=14)
     plt.ylabel("Percentage of Runs (%)")
@@ -66,21 +72,21 @@ def plot_failure_analysis(df_results):
 def plot_redundancy_validation(control_traces, redundancy_traces):
     """
     Oxygen Stability Trace.
-    Overlays 15 random runs of Control vs Redundancy.
+    Overlays 20 random runs of Control vs Redundancy.
     Visualizes how redundancy smooths out oxygen dips.
     """
     plt.figure(figsize=(12, 6))
     
-    # Plot 15 random traces from Control (Red)
+    # Plot 20 random traces from Control (Red)
     # These will look like "Cliffs" - steady, then plummeting to death.
-    for i in range(min(15, len(control_traces))):
+    for i in range(min(20, len(control_traces))):
         # Only plot if they actually died of suffocation or survived to show the contrast
-        plt.plot(control_traces[i]['o2'], color='red', alpha=0.15, linewidth=1.5)
+        plt.plot(control_traces[i]['o2'], color='red', alpha=0.20, linewidth=1.5)
 
-    # Plot 15 random traces from Redundancy (Green)
+    # Plot 20 random traces from Redundancy (Green)
     # These will look like "Dips" - dropping slightly when 1 machine breaks, then recovering.
-    for i in range(min(15, len(redundancy_traces))):
-        plt.plot(redundancy_traces[i]['o2'], color='green', alpha=0.15, linewidth=1.5)
+    for i in range(min(20, len(redundancy_traces))):
+        plt.plot(redundancy_traces[i]['o2'], color='green', alpha=0.20, linewidth=1.5)
 
     # Threshold Line
     plt.axhline(y=0, color='black', linestyle='--', linewidth=1, label='Death Threshold')
@@ -103,20 +109,20 @@ def plot_redundancy_validation(control_traces, redundancy_traces):
 def plot_battery_stability(control_traces, battery_traces):
     """
     Resource Trace.
-    Overlays 15 random runs of Control vs Battery Test.
+    Overlays 20 random runs of Control vs Battery Test.
     Visualizes how the 'Buffer' strategy smooths out the storms.
     """
     plt.figure(figsize=(12, 6))
     
-    # Plot 15 random traces from Control (Red)
+    # Plot 20 random traces from Control (Red)
     # This shows the volatility of the small battery
-    for i in range(min(15, len(control_traces))):
-        plt.plot(control_traces[i]['battery'], color='red', alpha=0.15)
+    for i in range(min(20, len(control_traces))):
+        plt.plot(control_traces[i]['battery'], color='red', alpha=0.20)
         
-    # Plot 15 random traces from Battery Test (Blue)
+    # Plot 20 random traces from Battery Test (Blue)
     # This shows the stability of the large battery
-    for i in range(min(15, len(battery_traces))):
-        plt.plot(battery_traces[i]['battery'], color='blue', alpha=0.15)
+    for i in range(min(20, len(battery_traces))):
+        plt.plot(battery_traces[i]['battery'], color='blue', alpha=0.20)
         
     # Dummy lines for legend
     plt.plot([], [], color='red', label='Control (Low Capacity)')
