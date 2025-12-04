@@ -35,6 +35,41 @@ class MarsColony:
             for i in range(self.cfg.num_water_reclaimers)
         ]
 
+    def _run_machines(self, machines, power_cost, available_power, 
+                      current_storage, max_storage, 
+                      input_resource_limit=None):
+        produced = 0
+        input_consumed = 0
+        power_used = 0
+        output_storage = current_storage
+        
+        for machine in machines:
+            # Check power
+            has_power = available_power >= power_cost
+
+            # Check storage (stop if full)
+            needs_output = output_storage < max_storage
+
+            if has_power and needs_output:
+                raw_prod = machine.daily_check()
+
+                # Limit by input availability (waste water)
+                actual_prod = raw_prod
+                if input_resource_limit is not None:
+                    actual_prod = min(raw_prod, input_resource_limit - input_consumed)
+
+                # Determine if machine "ran" (consumed power)
+                # It consumes power if it produced something OR if it's broken but tried to run
+                if actual_prod > 0 or (raw_prod == 0 and machine.is_broken):
+                    produced += actual_prod
+                    input_consumed += actual_prod
+                    output_storage += actual_prod
+                    
+                    power_used += power_cost
+                    available_power -= power_cost
+        
+        return produced, input_consumed, power_used
+
     def step(self):
         """Simulates one day"""
         self.day += 1
@@ -62,32 +97,33 @@ class MarsColony:
         self.waste_water += total_water_need * self.cfg.water_recycle_efficiency
         
         # --- 5. Machine Operation ---
-        o2_produced = 0
-        for oxy in self.oxygenators:
-            machine_power = self.cfg.oxygenator_power_cost # kWh cost to run machine
-            needs_o2 = self.o2 < self.cfg.max_o2_tank
-            if available_power >= machine_power and needs_o2:
-                o2_produced += oxy.daily_check()
-                available_power -= machine_power
-                total_power_need += machine_power
-            else:
-                # Not enough power to run machine
-                pass 
+        
+        # Oxygenators
+        needs_o2 = self.o2 < self.cfg.max_o2_tank
+        o2_produced, _, oxy_power = self._run_machines(
+            self.oxygenators,
+            self.cfg.oxygenator_power_cost,
+            available_power,
+            current_storage=self.o2,
+            max_storage=self.cfg.max_o2_tank,
+            input_resource_limit=None
+        )
+        available_power -= oxy_power
+        total_power_need += oxy_power
 
-        water_reclaimed = 0
-        for water_rec in self.water_reclaimers:
-            machine_power = self.cfg.water_reclaimer_power_cost # kWh cost to run machine
-            needs_water = self.water < self.cfg.max_water_tank
-            if available_power >= machine_power and needs_water:
-                # Logic: Can only process what is in the waste tank
-                actual_processed = min(water_rec.daily_check(), self.waste_water)
-                water_reclaimed += actual_processed
-                self.waste_water -= actual_processed # Remove from waste tank
-                available_power -= machine_power
-                total_power_need += machine_power
-            else:
-                # Not enough power to run machine
-                pass
+        # Water Reclaimers
+        needs_water = self.water < self.cfg.max_water_tank
+        water_reclaimed, waste_processed, water_power = self._run_machines(
+            self.water_reclaimers,
+            self.cfg.water_reclaimer_power_cost,
+            available_power,
+            current_storage=self.water,
+            max_storage=self.cfg.max_water_tank,
+            input_resource_limit=self.waste_water
+        )
+        self.waste_water -= waste_processed
+        available_power -= water_power
+        total_power_need += water_power
 
         # --- 6. Update Resources ---
         self.battery = min(self.cfg.max_battery, self.battery + power_gen - total_power_need)
