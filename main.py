@@ -53,7 +53,9 @@ def run_experiment(experiment_mode, n_simulations=1000):
 # ==========================================
 
 if __name__ == "__main__":
+    print("==============================")
     print("=== Mars Colony Simulation ===")
+    print("==============================")
 
     # --- 1. Run Simulations ---
     print("Gathering Data...")
@@ -79,4 +81,5 @@ if __name__ == "__main__":
     print("\n\nGenerating Visualizations...")
     visualization.plot_survival_curves(df_all)
     visualization.plot_failure_analysis(df_all)
+    visualization.plot_redundancy_validation(control_histories, oxy_histories)
     visualization.plot_battery_stability(control_histories, battery_histories)
