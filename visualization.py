@@ -46,7 +46,7 @@ def plot_failure_analysis(df_results):
     Shows breakdown of 'How' colonies died per experiment.
     """
     # Pivot data to get counts of each Cause per Experiment
-    breakdown = df_results.groupby(['Experiment', 'Cause']).size().unstack(fill_value=0)
+    breakdown = df_results.groupby(['Experiment', 'Cause'], observed=True).size().unstack(fill_value=0)
     
     # Convert to percentages for fair comparison
     breakdown_pct = breakdown.div(breakdown.sum(axis=1), axis=0) * 100
