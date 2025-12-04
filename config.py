@@ -31,7 +31,7 @@ class MCSimConfig:
         # --- Crop Settings ---
         # Note: power cost for LEDs, pumps, etc. is included in daily_base_power_consumption
         self.crop_daily_water_need = 10.0 # Liters/day
-        self.crop_food_production = 30000.0 # kCal/day
+        self.crop_food_production = 20000.0 # kCal/day
         self.crop_o2_production = 1.0 # kg/day
 
         # --- Default Machine Settings ---
