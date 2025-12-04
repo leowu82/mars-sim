@@ -38,6 +38,20 @@ class MarsColony:
     def _run_machines(self, machines, power_cost, available_power, 
                       current_storage, max_storage, 
                       input_resource_limit=None):
+        """
+        Generic machine runner.
+
+        Args:
+            machines (list): List of Machine instances.
+            power_cost (float): Power cost per machine per day.
+            available_power (float): Available power for the day.
+            current_storage (float): Current amount of the output resource.
+            max_storage (float): Maximum capacity for the output resource.
+            input_resource_limit (float, optional): Limit on input resource consumption.
+
+        Returns:
+            tuple: (produced amount, input consumed, power used)
+        """
         produced = 0
         input_consumed = 0
         power_used = 0

@@ -83,7 +83,12 @@ class MarsEnvironment:
     def get_sunlight_efficiency(self, Ls_degrees):
         """
         Returns sunlight efficiency (0.0 to 1.0) based on Martian season (Ls) and dust storms.
-        :param Ls_degrees: Solar Longitude in degrees (0-360)
+
+        Args:
+            Ls_degrees (float): Solar Longitude in degrees (0-360)
+
+        Returns:
+            float: Sunlight efficiency factor
         """
         # --- 1. SEASONAL VARIATION ---
         # Formula approximates the seasonal dust opacity variation
