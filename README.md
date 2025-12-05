@@ -24,7 +24,7 @@ The simulation tracks the daily status of Oxygen, Water, Food, and Power. It uti
 ### Deterministic Variables
 - Mission Members: 6 crew members
 - Mission Duration: 500 days
-- Consumption: Based on NASA "Baseline Values for Human Space Flight"
+- Consumption: Oxygen, water, and calorie consumption based on NASA "Baseline Values for Human Space Flight"
 - Power Load: for oxygenator, water reclaimer, and other base systems
 
 ### Stochastic Variables (The Risks)
