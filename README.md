@@ -144,9 +144,7 @@ python main.py
 ## Academic Context & Scope
 
 While this project is an original implementation, it explores concepts similar to advanced aerospace reliability studies, such as the analysis of the [Lunar Palace 1 bioregenerative system](https://www.researchgate.net/publication/365377952_Reliability_and_lifetime_estimation_of_bioregenerative_life_support_system_based_on_370-day_closed_human_experiment_of_lunar_palace_1_and_Monte_Carlo_simulation)
-(utilizes Monte Carlo methods to estimate system lifetimes based on 370 days of closed-loop human experiments)
-
-### Main Distinction
+(utilizes Monte Carlo methods to estimate system lifetimes based on 370 days of closed-loop human experiments). The main distinction between these two:
 
 - **Existing Research (Lunar Palace 1)**: Focuses on high granular modeling of specific components, biological conversion rates, and data from physical testbeds.
 
