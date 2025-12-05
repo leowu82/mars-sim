@@ -101,3 +101,80 @@ Battery Buffer Stability During Storms
 
 ![Battery Buffer Stability During Storms](results/plot_battery_traces.png)
 
+
+## Getting Started
+
+### Prerequisites
+- Python 3.8+
+- numpy
+- pandas
+- matplotlib
+- pillow
+
+```shell
+pip install numpy pandas matplotlib pillow
+```
+
+### Installation
+
+```shell
+git clone https://github.com/leowu82/mars-sim.git
+cd mars-sim
+```
+
+### Directory Structure
+
+```
+project-ares/
+├── main.py           # Entry point (runs the experiments)
+├── config.py         # Simulation constants & hypothesis settings
+├── models.py         # Physical models (Machine, Crops, Environment)
+├── simulation.py     # Core logic (MarsColony class)
+├── visualization.py  # Plotting functions
+└── README.md
+```
+
+### Run
+
+```shell
+python main.py
+```
+
+
+## Academic Context & Scope
+
+While this project is an original implementation, it explores concepts similar to advanced aerospace reliability studies, such as the analysis of the [Lunar Palace 1 bioregenerative system](https://www.researchgate.net/publication/365377952_Reliability_and_lifetime_estimation_of_bioregenerative_life_support_system_based_on_370-day_closed_human_experiment_of_lunar_palace_1_and_Monte_Carlo_simulation)
+(utilizes Monte Carlo methods to estimate system lifetimes based on 370 days of closed-loop human experiments)
+
+### Main Distinction
+
+- **Existing Research (Lunar Palace 1)**: Focuses on high granular modeling of specific components, biological conversion rates, and data from physical testbeds.
+
+- **My Project**: A simplified conceptual model. Focuses on high-level system interactions to explore architectural trade-offs (Redundancy vs. Buffering) rather than component-level physics.
+
+
+## References
+    
+- Gemini to help me understand water systems and food production in long-term space expeditions
+    
+    [Gemini Chat Log](https://gemini.google.com/share/84ebda2d5189)
+    
+- NASA Environmental Control & Life Support System (ECLSS): Human-Centered Approach
+    
+    [www.nasa.gov](https://www.nasa.gov/wp-content/uploads/2023/07/eclss-technical-brief-ochmo.pdf)
+    
+- NASA Water – Human Consumption
+    
+    [www.nasa.gov](https://www.nasa.gov/wp-content/uploads/2023/12/ochmo-tb-027-water.pdf)
+    
+- NASA Water Recycle System Study
+    
+    [NASA Achieves Water Recovery Milestone on International Space Station](https://www.nasa.gov/missions/station/iss-research/nasa-achieves-water-recovery-milestone-on-international-space-station/)
+    
+- Mars Climate
+    
+    [gemelli.colorado.edu](https://gemelli.colorado.edu/~lmontabone/Montabone_et_al_2015.pdf)
+        
+- Python guidance (gemini)
+    
+    [Gemini - direct access to Google AI](https://gemini.google.com/share/6e3bb793aeb5)
