@@ -177,4 +177,4 @@ While this project is an original implementation, it explores concepts similar t
         
 - Python guidance (gemini)
     
-    [Gemini - direct access to Google AI](https://gemini.google.com/share/6e3bb793aeb5)
+    [Gemini Chat Log](https://gemini.google.com/share/6e3bb793aeb5)
