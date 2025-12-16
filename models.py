@@ -70,7 +70,7 @@ class CropModule:
         
         # Biological Variability (Normal Distribution)
         # Plants vary by +/- 10% naturally (Mean=1.0, Sigma=0.1)
-        bio_factor = max(0.8, min(1.2, random.gauss(1.0, 0.1))) # Clamp between 0.8 and 1.2
+        bio_factor = random.normalvariate(1.0, 0.1)
         
         # Production
         return (self.base_food * self.health * bio_factor, self.base_o2 * self.health * bio_factor)

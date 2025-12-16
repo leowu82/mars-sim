@@ -30,9 +30,9 @@ class MCSimConfig:
 
         # --- Crop Settings ---
         # Note: power cost for LEDs, pumps, etc. is included in daily_base_power_consumption
-        self.crop_daily_water_need = 10.0 # Liters/day
-        self.crop_food_production = 20000.0 # kCal/day
-        self.crop_o2_production = 1.0 # kg/day
+        self.crop_daily_water_need = 11.0 # Liters/day
+        self.crop_food_production = 18350.0 # kCal/day
+        self.crop_o2_production = 0.8 # kg/day
 
         # --- Default Machine Settings ---
         
@@ -51,7 +51,7 @@ class MCSimConfig:
 
         # --- Power System ---
         self.solar_capacity = 45.0 # kW
-        self.max_battery = 500.0 # kWh
+        self.max_battery = 600.0 # kWh
 
         # --- Hypothesis 1 Variables (Oxygenator Redundancy) ---
         # Control: 1 Big Machine. Experiment: 3 Small Machines.
@@ -63,8 +63,8 @@ class MCSimConfig:
         # --- Hypothesis 2 Variables (Battery vs Solar) ---
         # Control: Balanced. Experiment: Huge Battery, Less Solar.
         if mode == "BATTERY_TEST":
-            # Assume 1 kW Solar -> 40 kWh Battery
-            exchange_ratio = 40.0
+            # Assume 1 kW Solar -> 50 kWh Battery
+            exchange_ratio = 50.0
             reduce_amount = 12.5 # kW reduction
             self.solar_capacity -= reduce_amount # Reduce solar
             self.max_battery += (reduce_amount * exchange_ratio) # Increase battery
