@@ -62,19 +62,29 @@ Here's a sample run of 1,000 Monte Carlo simulations for three experiment types:
 
 ```terminal
 --- Starting Experiment: CONTROL ---
-Simulations: 1000
-Success Rate: 49.70%
-Failure Causes: {'Power Failure': 333, 'Suffocation': 162, 'Dehydration': 8}
+Simulations: 2000
+Success Rate: 44.40%
+Failure Causes: {'Suffocation': 343, 'Starvation': 156, 'Power Failure': 567, 'Dehydration': 46}
 
 --- Starting Experiment: OXYGENATOR_REDUNDANCY_TEST ---
-Simulations: 1000
-Success Rate: 62.50%
-Failure Causes: {'Power Failure': 370, 'Dehydration': 5}
+Simulations: 2000
+Success Rate: 56.80%
+Failure Causes: {'Suffocation': 3, 'Starvation': 183, 'Power Failure': 629, 'Dehydration': 49}
 
 --- Starting Experiment: BATTERY_TEST ---
-Simulations: 1000
-Success Rate: 66.70%
-Failure Causes: {'Power Failure': 178, 'Suffocation': 152, 'Dehydration': 3}
+Simulations: 2000
+Success Rate: 57.95%
+Failure Causes: {'Suffocation': 400, 'Starvation': 175, 'Power Failure': 215, 'Dehydration': 51}
+
+--- Starting Experiment: CROP_SUBSTRATE_TEST ---
+Simulations: 2000
+Success Rate: 49.20%
+Failure Causes: {'Suffocation': 402, 'Starvation': 31, 'Power Failure': 542, 'Dehydration': 41}
+
+--- Starting Experiment: COMBINED_TEST ---
+Simulations: 2000
+Success Rate: 81.65%
+Failure Causes: {'Suffocation': 7, 'Starvation': 51, 'Power Failure': 231, 'Dehydration': 78}
 ```
 
 ### Conclusion 1: Redundancy Eliminates "Sudden Death"
