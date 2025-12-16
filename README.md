@@ -39,7 +39,7 @@ Crop Production | Normal Distribution | Simulates biological variability in food
 
 ## Phase 2: Experiments & Hypotheses
 
-Ran 2000 Monte Carlo simulations for three distinct experiments.
+Ran 2000 Monte Carlo simulations for four distinct experiments.
 
 ### The Control Group (Baseline)
 - **Setup**: 1 Large Oxygenator, Standard Battery, Standard Solar.
