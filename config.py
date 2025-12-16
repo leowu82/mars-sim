@@ -53,7 +53,7 @@ class MCSimConfig:
 
         # --- Power System ---
         self.solar_capacity = 45.0 # kW
-        self.starting_battery = 500.0 # kWh
+        self.starting_battery = 600.0 # kWh
         self.max_battery = 600.0 # kWh
 
         # --- Hypothesis 1 Variables (Oxygenator Redundancy) ---
