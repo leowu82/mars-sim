@@ -113,7 +113,6 @@ class MarsColony:
         # --- 5. Machine Operation ---
         
         # Oxygenators
-        needs_o2 = self.o2 < self.cfg.max_o2_tank
         o2_produced, _, oxy_power = self._run_machines(
             self.oxygenators,
             self.cfg.oxygenator_power_cost,
@@ -126,7 +125,6 @@ class MarsColony:
         total_power_need += oxy_power
 
         # Water Reclaimers
-        needs_water = self.water < self.cfg.max_water_tank
         water_reclaimed, waste_processed, water_power = self._run_machines(
             self.water_reclaimers,
             self.cfg.water_reclaimer_power_cost,
