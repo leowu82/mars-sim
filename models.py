@@ -59,7 +59,7 @@ class CropModule:
             # Health degrades without water
             self.health -= self.decay_rate
         else:
-            self.health += 0.1 # Slowly recovers
+            self.health += 0.05 # Slowly recovers
 
         # Clamp health between 0 and 1
         self.health = max(0.0, min(1.0, self.health))
