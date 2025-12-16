@@ -48,15 +48,16 @@ class CropModule:
     Includes Random Variables:
     - Biological Variability (Normal Distribution)
     """
-    def __init__(self, base_food, base_o2):
+    def __init__(self, base_food, base_o2, decay_rate):
         self.base_food = base_food
         self.base_o2 = base_o2
         self.health = 1.0 # Health factor
+        self.decay_rate = decay_rate
 
     def grow(self, has_water):
         if not has_water:
             # Health degrades without water
-            self.health -= 0.2 # Dies in 5 days without water
+            self.health -= self.decay_rate
         else:
             self.health += 0.1 # Slowly recovers
 
@@ -65,7 +66,6 @@ class CropModule:
 
         # If dead, no production
         if self.health <= 0.0:
-            self.health = 0.0
             return 0.0, 0.0
         
         # Biological Variability (Normal Distribution)
