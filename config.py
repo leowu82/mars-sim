@@ -33,7 +33,7 @@ class MCSimConfig:
         # Note: power cost for LEDs, pumps, etc. is included in daily_base_power_consumption
         self.crop_daily_water_need = 14.5 # Liters/day
         self.crop_food_production = 25000.0 # kCal/day
-        self.crop_o2_production = 0.8 # kg/day
+        self.crop_o2_production = 0.79 # kg/day
         self.crop_decay_rate = 0.3 # Health decay rate without water
 
         # --- Default Machine Settings ---
